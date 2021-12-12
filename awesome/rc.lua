@@ -44,7 +44,7 @@ end
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
 
-config_dir = ("/home/ben/.config/awesome/")
+config_dir = ("~/.config/awesome/")
 themes_dir = (config_dir .. "/themes")
 
 beautiful.init(themes_dir .. "/theme.lua")
@@ -57,7 +57,7 @@ autorunApps = {
   "setxkbmap gb",
   "nitrogen --restore",
   "killall picom",
-  "picom",
+  "picom --experimental-backends",
 }
 
 if autorun then
@@ -84,14 +84,14 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.spiral,
+    awful.layout.suit.spiral.dwindle,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral.dwindle,
+    awful.layout.suit.spiral,
     awful.layout.suit.max,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
@@ -113,41 +113,12 @@ menu = {
    { "Quit", function() awesome.quit() end },
 }
 
-profileClickerMenu = {
-  { "Roblox", function() awful.util.spawn("aaclickertoggle true robloxplayerbeta.exe 15") end },
-}
-
-autoclickerMenu = {
-  { "Toggle", function() awful.util.spawn("aaclickertoggle false anything 1") end },
-  { "Clear PID", function() awful.util.spawn("echo '' > /tmp/aaclickerpid") end },
-
-  { "Profiles", profileClickerMenu },
-
-  { "Custom", function() awful.util.spawn("aaclickergui") end },
-}
-
-speedhackMenu = {
-  { "Pause speed", function() awful.util.spawn("0") end },
-  { "25% speed", function() awful.util.spawn("speed .25") end },
-  { "50% speed", function() awful.util.spawn("speed .5") end },
-  { "100% speed", function() awful.util.spawn("speed 1") end },
-  { "200% speed", function() awful.util.spawn("speed 2") end }, 
-  { "400% speed", function() awful.util.spawn("speed 4") end },
-  { "Max speed", function () awful.util.spawn("speed 1000") end },
-}
-
 mainmenu = awful.menu({ items = { { "Awesome", menu, beautiful.awesome_icon },
                                     { "Terminal", terminal },
                                     { "Brave", browser },
                                     { "Steam", steam },
                                   }
                         })
-
-cheatmenu = awful.menu({ items = {
-  { "Autoclicker", autoclickerMenu },
-  { "Speedhack", speedhackMenu },
-  { "Stop", function() awful.util.spawn("killcheats") end },
-}})
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
                                      menu = mainmenu })
@@ -350,9 +321,6 @@ globalkeys = gears.table.join(
     awful.key({ modkey,           }, "w", function () mainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
-    awful.key({ modkey,           }, "c", function () cheatmenu:show() end,
-              {description = "Show cheat menu", group = "client"}),
-
     -- Layout manipulation
     awful.key({ modkey, "Shift"   }, "j", function () awful.client.swap.byidx(  1)    end,
               {description = "swap with next client by index", group = "client"}),
@@ -414,7 +382,7 @@ globalkeys = gears.table.join(
     --awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
     --          {description = "run prompt", group = "launcher"}),
 
-    awful.key({ modkey },            "p",     function () awful.util.spawn("dmenu_run") end,
+    awful.key({ modkey },            "d",     function () awful.util.spawn("dmenu_run") end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey, "Shift" },   "p",     function () awful.util.spawn("poweroff") end,
@@ -422,9 +390,6 @@ globalkeys = gears.table.join(
 
     awful.key({ modkey },            "i",     function () awful.util.spawn("flameshot gui") end,
               {description = "take screenshot", group = "client"}),
-
-    awful.key({ modkey, "Control" },            "g",     function () awful.util.spawn("aaclickertoggle true robloxplayerbeta.exe 15") end,
-              {description = "Start autoclicker", group = "client"}),
 
     awful.key({ modkey, "Control" },            "y",     function() awful.util.spawn("rebirth") end,
               {description = "Rebirths in weight lifting simulator", group = "client"}),
@@ -440,7 +405,7 @@ globalkeys = gears.table.join(
               end,
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
-    awful.key({ modkey }, "d", function() menubar.show() end,
+    awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
 )
 
