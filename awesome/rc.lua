@@ -57,7 +57,7 @@ autorunApps = {
   "setxkbmap gb",
   "nitrogen --restore",
   "killall picom",
-  "picom --experimental-backends",
+  "picom",
 }
 
 if autorun then
