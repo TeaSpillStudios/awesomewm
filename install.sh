@@ -1,5 +1,20 @@
 #!/bin/bash
 
+# --- Wipe original configs-------------------------
+
+sudo rm ~/.config/awesome -r
+
+# --------------------------------------------------
+
+
+# --- Install rofi config files --------------------
+
+mkdir -p ~/.config/rofi
+
+cp ./config.rasi ~/.config/rofi/
+
+# --------------------------------------------------
+
 # --- Read contents of package file into array -----
 
 packageFile=packages
