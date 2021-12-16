@@ -1,6 +1,13 @@
 #!/bin/bash
 
-# --- Wipe original configs-------------------------
+# --- Update system --------------------------------
+
+sudo pacman -Sy
+
+# --------------------------------------------------
+
+
+# --- Wipe original configs ------------------------
 
 sudo rm ~/.config/awesome -r
 
@@ -14,6 +21,7 @@ mkdir -p ~/.config/rofi
 cp ./config.rasi ~/.config/rofi/
 
 # --------------------------------------------------
+
 
 # --- Read contents of package file into array -----
 
