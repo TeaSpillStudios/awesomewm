@@ -56,9 +56,13 @@ installConfig() {
 customiseConfig() {
   read -p "Terminal: " terminal
   read -p "Browser: " browser
+  read -p "Keyboard layout: " keyboard
+
+  echo "Commonly used layout:\nUS - United States\nGB - Great Britain (UK)\nnl - Netherlands\nSE - Sweden"
 
   sed -i -e "s/alacritty/$terminal/g" $HOME/.config/awesome/rc.lua
   sed -i -e "s/brave/$browser/g" $HOME/.config/awesome/rc.lua
+  sed -i -e "s/setxkbmap gb/setxkbmap ${keyboard,,}/g" ~/.config/awesome/rc.lua
 }
 
 # --------------------------------------------------
