@@ -2,7 +2,16 @@
 
 # --- Update system --------------------------------
 
-sudo pacman -Sy
+if [ -f "/etc/arch-release" ]; then 
+  sudo pacman -Sy
+else
+
+  echo Only arch is supported at the moment
+
+#  if [ -f "/etc/apt/source.list" ] then
+#    sudo apt update; sudo apt upgrade -y
+#  fi
+fi
 
 # --------------------------------------------------
 
