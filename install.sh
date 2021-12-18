@@ -63,14 +63,34 @@ installConfig() {
 # --- Replace variables in config file -------------
 
 customiseConfig() {
+
+  echo '
+Pre-installed packages:
+  alacritty
+  kitty
+'
+
   read -p "Terminal: " terminal
+
+  echo '
+Pre-installed packages:
+  firefox
+'
+
   read -p "Browser: " browser
+
+  echo '
+Commonly used layout:
+  US - United States
+  GB - Great Britain (UK)
+  NL - Netherlands
+  SE - Sweden
+'
+
   read -p "Keyboard layout: " keyboard
 
-  echo "Commonly used layout:\nUS - United States\nGB - Great Britain (UK)\nnl - Netherlands\nSE - Sweden"
-
-  sed -i -e "s/alacritty/$terminal/g" $HOME/.config/awesome/rc.lua
-  sed -i -e "s/brave/$browser/g" $HOME/.config/awesome/rc.lua
+  sed -i -e "s/alacritty/${terminal,,}/g" $HOME/.config/awesome/rc.lua
+  sed -i -e "s/brave/${browser,,}/g" $HOME/.config/awesome/rc.lua
   sed -i -e "s/setxkbmap gb/setxkbmap ${keyboard,,}/g" ~/.config/awesome/rc.lua
 }
 
@@ -94,8 +114,8 @@ main() {
   done
 
   installConfig
-  customiseConfig
   installLain
+  customiseConfig
 }
 
 # --------------------------------------------------
@@ -104,5 +124,16 @@ main() {
 # --- Run the main function ------------------------
 
 main
+
+# --------------------------------------------------
+
+
+# --- Say thank you to the user at the end ---------
+
+echo '
+Awesome is now isnstalled and themed!
+
+Thank you for using this script! I hope you enjoy your new setup.
+'
 
 # --------------------------------------------------
