@@ -5,12 +5,9 @@
 if [ -f "/etc/arch-release" ]; then 
   sudo pacman -Sy
 else
-
-  echo Only arch is supported at the moment
-
-#  if [ -f "/etc/apt/source.list" ] then
-#    sudo apt update; sudo apt upgrade -y
-#  fi
+  if [ -f "/etc/apt/source.list" ]; then
+    sudo apt update; sudo apt upgrade -y
+  fi
 fi
 
 # --------------------------------------------------
@@ -44,7 +41,13 @@ mapfile -t packageArray < ./packages
 
 # --- Function to install packages without prompt -- 
 installPackage() {
-  yes | sudo pacman -S $1 --noconfirm 
+  if [ -f "/etc/arch-release" ]; then
+    yes | sudo pacman -S $1 --noconfirm 
+  else
+    if [ -f "/etc/apt/sources.list" ]; then
+      sudo apt install $1 -y
+    fi
+  fi
 }
 
 # -------------------------------------------------- 
