@@ -57,7 +57,7 @@ autorunApps = {
   "setxkbmap gb",
   "nitrogen --restore",
   "killall picom",
-  "picom",
+  "picom --experimental-backends",
 }
 
 if autorun then
@@ -221,8 +221,8 @@ awful.screen.connect_for_each_screen(function(s)
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s, height="24", border_width = 5, shape = function(cr, width, height)
-      gears.shape.rounded_rect(cr, width, height, RADIUS)
+    s.mywibox = awful.wibar({ position = "top", screen = s, height="24", border_width = 0, shape = function(cr, width, height)
+      gears.shape.rounded_rect(cr, width, height, 0)
     end,
     })
 
