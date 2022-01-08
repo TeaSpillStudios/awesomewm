@@ -134,7 +134,7 @@ main
 # --- Say thank you to the user at the end ---------
 
 echo '
-Awesome is now isnstalled and themed!
+Awesome is now installed and themed!
 
 Thank you for using this script! I hope you enjoy your new setup.
 '
